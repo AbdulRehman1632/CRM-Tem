@@ -12,14 +12,16 @@ import { Server } from 'socket.io';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
 import customBoardRoutes from './routes/customBoard.js';
+import spaceRoutes from './routes/spaces.js';
 
 
 const app = express();
 const server = http.createServer(app);
 
-const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
 app.use(cors({ origin: CLIENT_URL, credentials: true }));
+
 app.use(express.json());
 
 
@@ -40,6 +42,7 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/boards', customBoardRoutes);
+app.use('/api/spaces', spaceRoutes);
 
 app.get('/', (req, res) => res.send('Video Call API is running'));
 
